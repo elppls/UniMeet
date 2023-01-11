@@ -675,6 +675,19 @@ class FirebaseServices {
     });
   }
 
+  //removes a request to join a club
+  static void removeRequestToJoinClub(String currentUser, String clubId) {
+    ClubsRef.doc(clubId)
+        .collection('joinRequests')
+        .doc(currentUser)
+        .get()
+        .then((doc) {
+      if (doc.exists) {
+        doc.reference.delete();
+      }
+    });
+  }
+
 //removes a club from the clubs joined by a user
   static void removeClubFromJoinedClubList(String currentUser, String clubId) {
     ClubsJoinedRef.doc(currentUser)

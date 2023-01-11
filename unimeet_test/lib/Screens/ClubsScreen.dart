@@ -80,7 +80,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                 ),
               ),
               const Spacer(flex: 22),
-              club.open == true
+              club.private == false
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -100,12 +100,12 @@ class _ClubsScreenState extends State<ClubsScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Spacer(),
-                        const Text('Closed'),
+                        const Text('Private'),
                         const Spacer(),
                         club.verfied == true
                             ? const FaIcon(
                                 FontAwesomeIcons.solidCircleCheck,
-                                color: lightRoyalBlueColor,
+                                color: verifyColor,
                               )
                             : const SizedBox.shrink(),
                         club.verfied == true

@@ -175,57 +175,6 @@ class _CreateClubScreenState extends State<CreateClubScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          if (_open == true)
-                            const Text('Open')
-                          else
-                            const Text('Closed'),
-                          PopupMenuButton(
-                            constraints: const BoxConstraints.expand(
-                                width: 100, height: 110),
-                            onSelected: (String result) {
-                              if (mounted) {
-                                setState(() {
-                                  if (result == 'open')
-                                    _open = true;
-                                  else
-                                    _open = false;
-                                });
-                              }
-                            },
-                            icon: const Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                            itemBuilder: (context) {
-                              return <PopupMenuItem<String>>[
-                                const PopupMenuItem(
-                                  child: Text('Open'),
-                                  value: 'open',
-                                ),
-                                const PopupMenuItem(
-                                  child: Text('Closed'),
-                                  value: 'closed',
-                                ),
-                              ];
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                          borderRadius: (BorderRadius.circular(10)),
-                          color: Colors.white,
-                          border: Border.all(color: Colors.green)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
                           if (_private == true)
                             const Text('Private')
                           else

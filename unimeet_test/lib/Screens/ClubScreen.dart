@@ -127,21 +127,21 @@ class _ClubScreenState extends State<ClubScreen> {
   }
 
   checkJoined() async {
-    bool isRequestedToJoin = await FirebaseServices.requestedToJoinClub(
-        widget.CurrentUUID, widget.ClubID);
-    if (mounted) {
-      setState(() {
-        _isRequestedToJoin = isRequestedToJoin;
-      });
-    }
-  }
-
-  checkRequestedToJoin() async {
     bool isJoined =
         await FirebaseServices.joinedClub(widget.CurrentUUID, widget.ClubID);
     if (mounted) {
       setState(() {
         _isJoined = isJoined;
+      });
+    }
+  }
+
+  checkRequestedToJoin() async {
+    bool isRequestedToJoin = await FirebaseServices.requestedToJoinClub(
+        widget.CurrentUUID, widget.ClubID);
+    if (mounted) {
+      setState(() {
+        _isRequestedToJoin = isRequestedToJoin;
       });
     }
   }
@@ -188,11 +188,11 @@ class _ClubScreenState extends State<ClubScreen> {
       }
     } else {
       FirebaseServices.leaveClub(widget.CurrentUUID, widget.ClubID);
-      FirebaseServices.removeClubFromJoinedClubList(
+      FirebaseServices.removeRequestToJoinClub(
           widget.CurrentUUID, widget.ClubID);
       if (mounted) {
         setState(() {
-          _isJoined = false;
+          _isRequestedToJoin = false;
         });
       }
     }
@@ -524,7 +524,7 @@ class _ClubScreenState extends State<ClubScreen> {
                               )
                             : (club.specificYear == '' ||
                                         club.specificYear == _yearUser) &&
-                                    club.private == false
+                                    (_isJoined == true || club.private == false)
                                 ? ElevatedButton(
                                     onPressed: () {
                                       joinAndLeaveClub();
@@ -597,25 +597,18 @@ class _ClubScreenState extends State<ClubScreen> {
                                 _yearUser == '' ||
                             club.specificYear == '' ||
                             club.specificYear == _yearUser ||
-                            adminOrMember() == true)
-                          club.open == true
+                            adminOrMember() == true ||
+                            _type == 'Faculty')
+                          club.open == true || club.private == false
                               ? Column(
                                   children: <Widget>[...showPosts()],
                                 )
-                              : club.open == false && _isJoined ||
-                                      adminOrMember() == true
+                              : (club.open == false || club.private == true) &&
+                                      (_isJoined || adminOrMember() == true)
                                   ? Column(
                                       children: <Widget>[...showPosts()],
                                     )
-                                  : const SizedBox(
-                                      width: 200,
-                                      child: Center(
-                                        child: Text(
-                                          'This club is closed, you need to join to be able to view the contents of the club',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    )
+                                  : const SizedBox.shrink()
                         else if (club.specificYear != _yearUser)
                           const Center(
                             child: Text(
