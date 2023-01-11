@@ -1,16 +1,10 @@
-# unimeet_test
+# UniMeet
 
-A new Flutter project.
+An Educational Social Media Platform. 
 
-## Getting Started
+## Notes
 
-This project is a starting point for a Flutter application.
+You have to sign up to be able to use the application, currently we only allow you to sign up if you have an email
+with a jordanian university doamian example@UNIVERSITY.edu.jo, if OTP is not working, it's because the server is down.
+if you sign in and are unable to view any data, it's probably we stopped paying to firebase.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

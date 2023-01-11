@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:unimeet_test/Models/ClubModel.dart';
 import 'package:unimeet_test/UniMeetColors/UniMeetConstants.dart';

@@ -77,7 +77,8 @@ class _CommentScreenState extends State<CommentScreen> {
   buildComment(String commentId, String commentText, String creatorId,
       Timestamp datePosted) {
     return FutureBuilder(
-      future: usersRef.doc(creatorId).get(),
+      future:
+          FirebaseFirestore.instance.collection('users').doc(creatorId).get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return SizedBox.shrink();

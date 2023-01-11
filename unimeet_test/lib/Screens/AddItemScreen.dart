@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,8 +30,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
     XFile? file = await picker.pickImage(source: ImageSource.gallery);
 
     String uniqueFileName = DateTime.now().microsecondsSinceEpoch.toString();
-    Reference referenceDirImages =
-        storageRef.child('storeImages').child(widget.CurrentUUID);
+    Reference referenceDirImages = FirebaseStorage.instance
+        .ref()
+        .child('storeImages')
+        .child(widget.CurrentUUID);
     Reference refImagetoupload = referenceDirImages.child(uniqueFileName);
 
     try {
