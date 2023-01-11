@@ -165,6 +165,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           title: Container(
             child: Row(
               children: const [
+                Text('Messages'),
                 SizedBox(
                   width: 30,
                 ),

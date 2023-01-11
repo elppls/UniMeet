@@ -36,53 +36,60 @@ class _JoinRequestScreenState extends State<JoinRequestScreen> {
   }
 
   buildjoinRequests(UserModel user) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        height: 80,
-        decoration: BoxDecoration(
-          border: Border.all(color: lightRoyalBlueColor),
-          borderRadius: BorderRadius.circular(10),
+    return Column(
+      children: [
+        SizedBox(
+          height: 10,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Container(
-                height: 60.0,
-                width: 60.0,
-                child: user.profilePicture == ''
-                    ? Image.asset('Images/Image_not_available.png')
-                    : CachedNetworkImage(
-                        imageUrl: user.profilePicture as String,
-                        fit: BoxFit.cover,
-                      ),
-              ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            height: 80,
+            decoration: BoxDecoration(
+              border: Border.all(color: lightRoyalBlueColor),
+              borderRadius: BorderRadius.circular(10),
             ),
-            const SizedBox(
-              width: 15,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Container(
+                    height: 60.0,
+                    width: 60.0,
+                    child: user.profilePicture == ''
+                        ? Image.asset('Images/Image_not_available.png')
+                        : CachedNetworkImage(
+                            imageUrl: user.profilePicture as String,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  user.firstname! + " " + user.lastname! as String,
+                  style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.visible),
+                ),
+                Spacer(),
+                IconButton(
+                    onPressed: () {
+                      FirebaseServices.addMember(
+                          user.id as String, widget.ClubID as String);
+                      FirebaseServices.removeJoinRequest(
+                          user.id as String, widget.ClubID as String);
+                    },
+                    icon: Icon(Icons.add))
+              ],
             ),
-            Text(
-              user.firstname! + " " + user.lastname! as String,
-              style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  overflow: TextOverflow.visible),
-            ),
-            Spacer(),
-            IconButton(
-                onPressed: () {
-                  FirebaseServices.addMember(
-                      user.id as String, widget.ClubID as String);
-                  FirebaseServices.removeJoinRequest(
-                      user.id as String, widget.ClubID as String);
-                },
-                icon: Icon(Icons.add))
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

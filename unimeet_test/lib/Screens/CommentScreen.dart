@@ -157,7 +157,10 @@ class _CommentScreenState extends State<CommentScreen> {
                                         PopupMenuItem(
                                           child: Text('Delete'),
                                           value: "delete",
-                                          enabled: checkOwnComment(creatorId),
+                                          enabled: checkOwnComment(creatorId) ||
+                                              widget.PostId.creatorId
+                                                      as String ==
+                                                  widget.CurrentUUID,
                                         ),
                                       ];
                                     },

@@ -427,21 +427,24 @@ class _ClubScreenState extends State<ClubScreen> {
                         ),
                         adminOrMember() == true
                             ? Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   SizedBox(
-                                    width: 180,
+                                    width: 150,
                                     child: ElevatedButton(
                                       style: ButtonStyle(
                                         shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(0.0),
+                                                BorderRadius.circular(10.0),
                                           ),
                                         ),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                                Colors.white),
+                                                Colors.cyanAccent),
                                         maximumSize:
                                             MaterialStateProperty.all<Size>(
                                                 Size.infinite),
@@ -462,7 +465,7 @@ class _ClubScreenState extends State<ClubScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('Requests',
+                                          Text('Post Requests',
                                               style: TextStyle(
                                                   color: blueWhaleColor)),
                                           Text(
@@ -475,19 +478,19 @@ class _ClubScreenState extends State<ClubScreen> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 180,
+                                    width: 150,
                                     child: ElevatedButton(
                                       style: ButtonStyle(
                                         shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                           RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(0.0),
+                                                BorderRadius.circular(10.0),
                                           ),
                                         ),
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                                Colors.white),
+                                                Colors.cyanAccent),
                                         maximumSize:
                                             MaterialStateProperty.all<Size>(
                                                 Size.infinite),

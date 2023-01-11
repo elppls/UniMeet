@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   static Future<bool> signup(String firstname, String lastname, String email,
-      String password, String type) async {
+      String password, String type, String token) async {
     try {
       UserCredential authservice = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -21,7 +21,7 @@ class AuthService {
           'coverImage': '',
           'bio': '',
           'major': '',
-          'token': '',
+          'token': token,
           'nameHelper': firstname.toLowerCase() + " " + lastname.toLowerCase(),
           'type': type
         });

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_auth/email_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
@@ -34,6 +35,7 @@ class _SignupScreenState extends State<SignupScreen> {
   int _timerSeconds = 30;
   bool _resendCode = false;
   Timer? timer;
+  String? _token;
   bool emailAlreadyExists = true;
 
   late EmailAuth emailAuth;
@@ -105,7 +107,8 @@ class _SignupScreenState extends State<SignupScreen> {
     bool validated =
         emailAuth.validateOtp(recipientMail: _email, userOtp: _otp);
     if (validated == true) {
-      AuthService.signup(_firstName, _lastName, _email, _password, _type);
+      AuthService.signup(
+          _firstName, _lastName, _email, _password, _type, _token!);
       Navigator.pop(context);
     } else {
       showNewOTP();
@@ -114,7 +117,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   void initState() {
-    super.initState();
     emailAuth = EmailAuth(
       sessionName: "UniMeet",
     );
@@ -132,6 +134,20 @@ class _SignupScreenState extends State<SignupScreen> {
         }
       }
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        try {
+          await FirebaseMessaging.instance.getToken().then((value) => {
+                setState(() {
+                  _token = value as String;
+                })
+              });
+        } catch (e) {}
+
+        setState(() {});
+      });
+    });
+    super.initState();
   }
 
   @override
