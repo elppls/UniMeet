@@ -280,15 +280,19 @@ class _CommentScreenState extends State<CommentScreen> {
                       icon: const Icon(Icons.send),
                       iconSize: 20,
                       onPressed: () {
-                        String comment = _controller.text;
-                        _controller.clear();
-                        FirebaseServices.addComment(widget.PostId.id as String,
-                            comment, widget.CurrentUUID);
+                        if (_controller.text != "") {
+                          String comment = _controller.text;
+                          _controller.clear();
+                          FirebaseServices.addComment(
+                              widget.PostId.id as String,
+                              comment,
+                              widget.CurrentUUID);
 
-                        FirebaseServices.sendNotification(
-                            'New Comment!',
-                            'Someone Posted a comment on your post',
-                            VisitedUser?.token as String);
+                          FirebaseServices.sendNotification(
+                              'New Comment!',
+                              'Someone Posted a comment on your post',
+                              VisitedUser?.token as String);
+                        }
                       },
                     ),
                   ),

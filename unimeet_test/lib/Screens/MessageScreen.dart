@@ -52,8 +52,8 @@ class _MessageScreenState extends State<MessageScreen> {
                     width: MediaQuery.of(context).size.width * 0.5,
                     decoration: BoxDecoration(
                       color: isOwnProfile
-                          ? Color.fromARGB(58, 54, 244, 114)
-                          : Color.fromARGB(58, 244, 67, 54),
+                          ? Color.fromARGB(80, 37, 18, 144)
+                          : Color.fromARGB(57, 51, 3, 113),
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ),
@@ -213,7 +213,7 @@ class _MessageScreenState extends State<MessageScreen> {
                               controller: _controller,
                               decoration: const InputDecoration(
                                 hintText: 'Send Message',
-                                fillColor: Color.fromARGB(255, 186, 186, 186),
+                                fillColor: lightRoyalBlueColor,
                                 filled: true,
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.black),
@@ -230,15 +230,18 @@ class _MessageScreenState extends State<MessageScreen> {
                         icon: const Icon(Icons.send),
                         iconSize: 20,
                         onPressed: () {
-                          String message = _controller.text;
-                          _controller.clear();
-                          FirebaseServices.messageSend(
-                              widget.CurrentUUID, widget.VisitedUId, message);
+                          if (_controller.text == "") {
+                          } else {
+                            String message = _controller.text;
+                            _controller.clear();
+                            FirebaseServices.messageSend(
+                                widget.CurrentUUID, widget.VisitedUId, message);
 
-                          FirebaseServices.sendNotification(
-                              'New message',
-                              '${current?.firstname} Has sent you a message',
-                              visited?.token as String);
+                            FirebaseServices.sendNotification(
+                                'New message',
+                                '${current?.firstname} Has sent you a message',
+                                visited?.token as String);
+                          }
                         },
                       ),
                     ],

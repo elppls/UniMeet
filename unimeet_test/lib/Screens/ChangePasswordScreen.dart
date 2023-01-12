@@ -57,9 +57,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
     await FirebaseAuth.instance.currentUser?.updatePassword(password);
 
     await FirebaseAuth.instance.signOut();
-
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginSignupScreen()));
+    Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override

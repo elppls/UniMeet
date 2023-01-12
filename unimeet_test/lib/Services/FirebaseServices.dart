@@ -796,6 +796,32 @@ class FirebaseServices {
 
 //allows an admin to delete a club
   static Future<void> deleteClub(String clubId) async {
+    QuerySnapshot admins =
+        await ClubsRef.doc(clubId).collection('admins').get();
+    QuerySnapshot joinRequests =
+        await ClubsRef.doc(clubId).collection('joinRequests').get();
+    QuerySnapshot members =
+        await ClubsRef.doc(clubId).collection('members').get();
+    QuerySnapshot posts = await ClubsRef.doc(clubId).collection('posts').get();
+    QuerySnapshot postRequests =
+        await ClubsRef.doc(clubId).collection('requests').get();
+
+    for (int i = 0; i < admins.docs.length; i++) {
+      admins.docs[i].reference.delete();
+    }
+    for (int i = 0; i < joinRequests.docs.length; i++) {
+      joinRequests.docs[i].reference.delete();
+    }
+    for (int i = 0; i < members.docs.length; i++) {
+      members.docs[i].reference.delete();
+    }
+    for (int i = 0; i < posts.docs.length; i++) {
+      posts.docs[i].reference.delete();
+    }
+    for (int i = 0; i < postRequests.docs.length; i++) {
+      postRequests.docs[i].reference.delete();
+    }
+
     await FirebaseFirestore.instance
         .collection('clubs')
         .doc(clubId)
