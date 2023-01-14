@@ -274,7 +274,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               )
-            : SizedBox.shrink(),
+            : Center(
+                child: CircularProgressIndicator(
+                color: lightRoyalBlueColor,
+              )),
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverAppBar(
